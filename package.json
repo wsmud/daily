@@ -1,0 +1,11 @@
+{
+  "name": "daily",
+  "private": true,
+  "version": "0.0.0",
+  "main": "index.js",
+  "description": "武神传说日常任务",
+  "dependencies": {
+    "axios": "^0.26.1",
+    "qs": "^6.10.3"
+  }
+}
