@@ -5,6 +5,10 @@ const logger = require('../../librarys/logger');
 const { store } = yaml.load(fs.readFileSync(path.resolve(__dirname, '../../utils/gameInfo.yaml')));
 
 module.exports = function (tip) {
+  if (tip.includes('说：')) {
+    return;
+  }
+
   if (tip.includes('你去帮我找')) {
     this.sectTaskInfo.taskItem = tip.match(/<.+?>.+?<\/.+?>/)[0];
     const seller = store.find(({ goods }) => goods.includes(this.sectTaskInfo.taskItem));
@@ -30,8 +34,6 @@ module.exports = function (tip) {
   }
 
   if (/你先去休息一下吧/.test(tip)) {
-    this.nowTask = 'dungeon';
-    this.attach(this.dungeonEvents);
-    this.cmd.send(this.dungeon);
+    this.cmd.send(this.sect.chiefWay);
   }
 };

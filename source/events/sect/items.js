@@ -16,5 +16,12 @@ module.exports = function (data) {
     if (item.name === this.sectTaskInfo.seller) {
       this.cmd.send(`list ${item.id}`);
     }
+
+    if (item.name.includes(this.sect.chiefTitle)) {
+      this.cmd.send(`ask2 ${item.id}`);
+      this.nowTask = 'dungeon';
+      this.attach(this.dungeonEvents);
+      this.send(this.dungeon);
+    }
   }
 };
