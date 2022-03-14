@@ -6,6 +6,8 @@
   "description": "武神传说日常任务",
   "dependencies": {
     "axios": "^0.26.1",
+    "chalk": "2.4.1",
+    "dayjs": "^1.10.8",
     "qs": "^6.10.3"
   }
 }
