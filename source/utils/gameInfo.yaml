@@ -1,0 +1,85 @@
+sect:
+  - name: 武当派
+    tasker: 武当派第三代弟子 谷虚道长
+    taskerWay: jh fam 1 start;go north
+    chiefTitle: 武当派首席弟子
+    chiefWay: jh fam 1 start;go west;go northup
+  - name: 少林派
+    tasker: 少林寺第四十代弟子 清乐比丘
+    taskerWay: jh fam 2 start
+    chiefTitle: 少林派大师兄
+    chiefWay: jh fam 2 start;go north;go north;go northeast;go northwest;go north;go north
+  - name: 华山派
+    tasker: 市井豪杰 高根明
+    taskerWay: jh fam 3 start
+    chiefTitle: 华山派首席弟子
+    chiefWay: jh fam 3 start;go westup;go north
+  - name: 峨眉派
+    tasker: 峨眉派第五代弟子 苏梦清
+    taskerWay: jh fam 4 start;go west
+    chiefTitle: 峨眉大师姐
+    chiefWay: jh fam 4 start;go west;go south
+  - name: 逍遥派
+    tasker: 聪辩老人 苏星河
+    taskerWay: jh fam 5 start
+    chiefTitle: 逍遥派首席弟子
+    chiefWay: jh fam 5 start;go west
+  - name: 丐帮
+    tasker: 丐帮七袋弟子 左全
+    taskerWay: jh fam 6 start;go down
+    chiefTitle: 丐帮首席弟子
+    chiefWay: jh fam 6 start;go down;go east;go east;go east
+  - name: 杀手楼
+    tasker: 杀手教习 何小二
+    taskerWay: jh fam 7 start;go north
+    chiefTitle: 金牌杀手
+    chiefWay: jh fam 7 start;go north;go up;go up;go up;go up;go east
+  - name: 无门无派
+    tasker: 武馆教习
+    taskerWay: jh fam 0 start;go south;go south;go west
+    chiefTitle: null
+    chiefWay: null
+store:
+  - seller: 店小二
+    way: jh fam 0 start;go north;go north;go east
+    goods:
+      - <wht>米饭</wht>
+      - <wht>包子</wht>
+      - <wht>鸡腿</wht>
+      - <wht>面条</wht>
+      - <wht>扬州炒饭</wht>
+      - <wht>米酒</wht>
+      - <wht>花雕酒</wht>
+      - <wht>女儿红</wht>
+      - <hig>醉仙酿</hig>
+      - <hiy>神仙醉</hiy>
+  - seller: 杂货铺老板 杨永福
+    way: jh fam 0 start;go east;go south
+    goods:
+      - <wht>布衣</wht>
+      - <wht>钢刀</wht>
+      - <wht>木棍</wht>
+      - <wht>英雄巾</wht>
+      - <wht>布鞋</wht>
+      - <wht>铁戒指</wht>
+      - <wht>簪子</wht>
+      - <wht>长鞭</wht>
+      - <wht>钓鱼竿</wht>
+      - <wht>鱼饵</wht>
+  - seller: 药铺老板 平一指
+    way: jh fam 0 start;go east;go east;go north
+    goods:
+      - <hig>金创药</hig>
+      - <hig>引气丹</hig>
+  - seller: 铁匠铺老板 铁匠
+    way: jh fam 0 start;go east;go east;go south
+    goods:
+      - <wht>铁剑</wht>
+      - <wht>钢刀</wht>
+      - <wht>铁棍</wht>
+      - <wht>铁杖</wht>
+      - <wht>铁镐</wht>
+      - <wht>飞镖</wht>
+hunt:
+  npc: 扬州知府 程药发
+  way: jh fam 0 start;go west;go north;go north
