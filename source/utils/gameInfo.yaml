@@ -111,3 +111,6 @@ hunt:
     丐帮: >-
       jh fam 6 start;go down;go east;go east;go east;go up;go down;go east;go
       east;go up
+tower:
+  npc: 守门人
+  way: jh fam 9 start
