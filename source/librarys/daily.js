@@ -15,27 +15,39 @@ module.exports = class Daily extends Socket {
       taskItem: null,
       seller: null,
     };
+    this.cd = new Set();
+    this.gcd = false;
+    this.isCombat = false;
+    this.userSkills = null;
+    this.userStatus = new Set();
+    this.combatFailedNum = 0;
+    this.towerGuardianId = null;
+    this.nowRoomId = null;
+    this.timers = {
+      up: null,
+      pfm: null,
+    };
     this.nowTask = 'sect';
     this.sectEvents = [];
     this.dungeonEvents = [];
+    this.towerEvents = [];
     this.huntEvents = [];
     this.loadEvents();
   }
 
   loadEvents() {
-    this.sectEvents = fs
-      .readdirSync(path.resolve(__dirname, '../events/sect'))
-      .filter((fileName) => fileName.endsWith('.js'))
-      .map((fileName) => path.basename(fileName, '.js'));
-    this.dungeonEvents = fs
-      .readdirSync(path.resolve(__dirname, '../events/dungeon'))
-      .filter((fileName) => fileName.endsWith('.js'))
-      .map((fileName) => path.basename(fileName, '.js'));
-    this.huntEvents = fs
-      .readdirSync(path.resolve(__dirname, '../events/hunt'))
-      .filter((fileName) => fileName.endsWith('.js'))
-      .map((fileName) => path.basename(fileName, '.js'));
+    this.sectEvents = this.loadEvent('sect');
+    this.dungeonEvents = this.loadEvent('dungeon');
+    this.towerEvents = this.loadEvent('tower');
+    this.huntEvents = this.loadEvent('hunt');
     this.attach(this.sectEvents);
+  }
+
+  loadEvent(dir) {
+    return fs
+      .readdirSync(path.resolve(__dirname, `../events/${dir}`))
+      .filter((fileName) => fileName.endsWith('.js'))
+      .map((fileName) => path.basename(fileName, '.js'));
   }
 
   attach(events) {
