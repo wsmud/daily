@@ -4,6 +4,7 @@ module.exports = function (data) {
   }
 
   this.combatFailedNum++;
+  this.userStatus = new Set();
   clearInterval(this.timers.pfm);
   this.cmd.send('relive');
 };
