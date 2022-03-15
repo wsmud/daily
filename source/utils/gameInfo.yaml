@@ -114,3 +114,10 @@ hunt:
 tower:
   npc: 守门人
   way: jh fam 9 start
+  guardianTitle: 武道塔守护者
+temple:
+  way: jh fam 0 start;go north;go north;go west
+  pathId: yz/wumiao
+bank:
+  way: jh fam 0 start;go north;go west
+  pathId: yz/qianzhuang
