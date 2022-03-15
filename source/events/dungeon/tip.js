@@ -7,7 +7,7 @@ module.exports = function (tip) {
 
   if (tip.includes('精力不够')) {
     logger.info(`「${this.userConfig.name}」副本任务完成`);
-    this.cmd.send(`taskover signin,taskover zz1,taskover zz2`);
+    this.cmd.send(`taskover signin;taskover zz1;taskover zz2`);
     this.nowTask = 'tower';
     this.attach(this.towerEvents);
     this.cmd.send(this.gameInfo.tower.way);
@@ -19,7 +19,7 @@ module.exports = function (tip) {
       this.cmd.send(this.dungeon);
     } else {
       logger.info(`「${this.userConfig.name}」副本任务完成`);
-      this.cmd.send(`taskover signin,taskover zz1,taskover zz2`);
+      this.cmd.send(`taskover signin;taskover zz1;taskover zz2`);
       this.nowTask = 'tower';
       this.attach(this.towerEvents);
       this.cmd.send(this.gameInfo.tower.way);
