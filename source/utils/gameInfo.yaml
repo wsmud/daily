@@ -8,7 +8,9 @@ sect:
     tasker: 少林寺第四十代弟子 清乐比丘
     taskerWay: jh fam 2 start
     chiefTitle: 少林派大师兄
-    chiefWay: jh fam 2 start;go north;go north;go northeast;go northwest;go north;go north
+    chiefWay: >-
+      jh fam 2 start;go north;go north;go northeast;go northwest;go north;go
+      north
   - name: 华山派
     tasker: 市井豪杰 高根明
     taskerWay: jh fam 3 start
@@ -83,3 +85,29 @@ store:
 hunt:
   npc: 扬州知府 程药发
   way: jh fam 0 start;go west;go north;go north
+  path:
+    武当派: >-
+      jh fam 1 start;go north;go south;go west;go west;go east;go northup;go
+      north;go east;go west;go west;go northup;go northup;go northup;go north;go
+      north;go north;go north;go north;go north
+    少林派: >-
+      jh fam 2 start;go north;go west;go east;go east;go west;go north;go
+      northup;go southdown;go northwest;go northeast;go southeast;go
+      northwest;go north;go west;go east;go east;go west;go north;go west;go
+      east;go east;go west;go north;go west;go east;go north;go north
+    华山派: >-
+      jh fam 3 start;go eastup;go southup;jumpdown;go southup;go south;go
+      east;jh fam 3 start;go westup;go west;go east;go south;go southup;go
+      southup;break bi;go enter;go westup;go westup;jumpup;jh fam 3 start;go
+      westup;go north;go east;go west;go north;go east;go west;go north
+    峨眉派: >-
+      jh fam 4 start;go northup;go east;jh fam 4 start;go west;go south;go
+      east;go east;go west;go south;go north;go west;go south;go north;go
+      west;go west;go east;go north;go north;go south;go south;go south;go south
+    逍遥派: >-
+      jh fam 5 start;go north;go north;jh fam 5 start;go west;go south;jh fam 5
+      start;go south;go south;jh fam 5 start;go east;go north;go south;go
+      south;go south;jh fam 5 start;go down;go down
+    丐帮: >-
+      jh fam 6 start;go down;go east;go east;go east;go up;go down;go east;go
+      east;go up
