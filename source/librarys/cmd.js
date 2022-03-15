@@ -6,8 +6,13 @@ module.exports = class Cmd {
     this.#socket = socket;
   }
 
-  send(commandString) {
+  send(commandString, wait = true) {
     if (typeof commandString !== 'string') {
+      return;
+    }
+
+    if (!wait) {
+      commandString.split(';').forEach((cmd) => this.#socket.send(cmd));
       return;
     }
 
@@ -20,10 +25,7 @@ module.exports = class Cmd {
   }
 
   commandAgain() {
-    this.#commandList = [
-      ...this.#commandList,
-      this.lastCommand,
-    ];
+    this.#commandList = [...this.#commandList, this.lastCommand];
     this.#commandQueue();
   }
 
@@ -33,7 +35,7 @@ module.exports = class Cmd {
       return;
     }
 
-    if (nowTime - this.lastCommandTime < 3e2) {
+    if (nowTime - this.lastCommandTime < 5e2) {
       setTimeout(() => this.#commandQueue(), 1e2);
       return;
     }
@@ -46,4 +48,4 @@ module.exports = class Cmd {
       setTimeout(() => this.#commandQueue(), 1e2);
     }
   }
-}
+};

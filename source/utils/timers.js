@@ -49,8 +49,8 @@ function pfm() {
     return skillsAPriority - skillsBPriority;
   });
 
-  const filterSkills = sortSkills.filter((skill) => skill !== 'force.tuoli' && !this.cd.has(skill));
-  this.cmd.send(`perform ${filterSkills.shift()}`);
+  const canUseSkill = sortSkills.find((skill) => skill !== 'force.tuoli' && !this.cd.has(skill));
+  canUseSkill && this.cmd.send(`perform ${canUseSkill}`, false);
 }
 
 module.exports = {
