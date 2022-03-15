@@ -2,7 +2,7 @@ const fs = require('fs');
 const path = require('path');
 const yaml = require('js-yaml');
 const Socket = require('./socket');
-const gameInfo = yaml.load(fs.readFileSync(path.resolve(__dirname, '../../utils/gameInfo.yaml')));
+const gameInfo = yaml.load(fs.readFileSync(path.resolve(__dirname, '../utils/gameInfo.yaml')));
 
 module.exports = class Daily extends Socket {
   constructor(config) {
