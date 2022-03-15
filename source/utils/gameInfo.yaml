@@ -85,6 +85,7 @@ store:
 hunt:
   npc: 扬州知府 程药发
   way: jh fam 0 start;go west;go north;go north
+  pathId: yz/ymzhengting
   path:
     武当派: >-
       jh fam 1 start;go north;go south;go west;go west;go east;go northup;go
