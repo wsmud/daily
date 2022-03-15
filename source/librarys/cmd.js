@@ -24,6 +24,10 @@ module.exports = class Cmd {
     this.#commandList = [];
   }
 
+  hasCommand() {
+    return this.#commandList.length > 0;
+  }
+
   commandAgain() {
     this.#commandList = [...this.#commandList, this.lastCommand];
     this.#commandQueue();
@@ -31,7 +35,7 @@ module.exports = class Cmd {
 
   #commandQueue() {
     const nowTime = new Date().getTime();
-    if (this.#commandList.length < 1 || this.#socket.readyState !== 1) {
+    if (!this.hasCommand() || this.#socket.readyState !== 1) {
       return;
     }
 
@@ -44,7 +48,7 @@ module.exports = class Cmd {
     this.#socket.send(this.lastCommand);
     this.lastCommandTime = nowTime;
 
-    if (this.#commandList.length > 0) {
+    if (this.hasCommand()) {
       setTimeout(() => this.#commandQueue(), 1e2);
     }
   }
