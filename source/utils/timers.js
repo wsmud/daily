@@ -39,7 +39,7 @@ function up() {
 }
 
 function pfm() {
-  if (!this.isCombat || this.userStatus.has('busy') || this.userStatus.has('faint')) {
+  if (!this.isCombat || this.userStatus.has('busy') || this.userStatus.has('faint') || this.gcd) {
     return;
   }
 
