@@ -7,5 +7,6 @@ module.exports = function (data) {
     return this.socketClose();
   }
   this.sect = userSect;
+  this.userLevel = data.level;
   this.cmd.send(`stopstate;${this.sect.taskerWay}`);
 };

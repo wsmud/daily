@@ -8,10 +8,10 @@ module.exports = class Daily extends Socket {
   constructor(config) {
     super(config);
     this.sect = null;
-    this.userId = null;
     this.dungeonNum = 0;
+    this.userId = null;
+    this.userLevel = null;
     this.gameInfo = gameInfo;
-    this.dungeon = 'cr yz/lw/shangu';
     this.sectTaskInfo = {
       taskerId: null,
       taskItem: null,

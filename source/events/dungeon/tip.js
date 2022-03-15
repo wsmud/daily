@@ -5,24 +5,17 @@ module.exports = function (tip) {
     return;
   }
 
-  if (tip.includes('精力不够')) {
+  if (/精力不够|扫荡完成/.test(tip)) {
     logger.info(`「${this.userConfig.name}」副本任务完成`);
-    this.cmd.send(`taskover signin;taskover zz1;taskover zz2`);
+    this.cmd.send(
+      `taskover signin;taskover zz1;taskover zz2;jh fam 0 start;go south;go east;sell all`,
+    );
     this.nowTask = 'tower';
     this.attach(this.towerEvents);
     this.cmd.send(this.gameInfo.tower.way);
   }
 
-  if (tip.includes('完成度未满')) {
-    this.dungeonNum++;
-    if (this.dungeonNum < 20) {
-      this.cmd.send(this.dungeon);
-    } else {
-      logger.info(`「${this.userConfig.name}」副本任务完成`);
-      this.cmd.send(`taskover signin;taskover zz1;taskover zz2`);
-      this.nowTask = 'tower';
-      this.attach(this.towerEvents);
-      this.cmd.send(this.gameInfo.tower.way);
-    }
+  if (tip.includes('你的扫荡符不够')) {
+    this.cmd.send(`shop 0 20;${this.userConfig.dungeon} 20`);
   }
 };

@@ -39,8 +39,11 @@ module.exports = function (tip) {
 
     if (this.huntTaskInfo.cai) {
       logger.info(`「${this.userConfig.name}」追捕任务已完成`);
-      this.cmd.send('wakuang');
-
+      this.cmd.send(
+        /ord|hio/.test(this.userLevel)
+          ? 'jh fam 0 start;go west;go west;go north;go enter;go west;xiulian'
+          : 'wakuang',
+      );
       return;
     }
 
@@ -61,10 +64,14 @@ module.exports = function (tip) {
 
   if (tip.includes('最近没有在逃的逃犯了')) {
     logger.info(`「${this.userConfig.name}」追捕任务已完成`);
-    this.cmd.send('wakuang');
+    this.cmd.send(
+      /ord|hio/.test(this.userLevel)
+        ? 'jh fam 0 start;go west;go west;go north;go enter;go west;xiulian'
+        : 'wakuang',
+    );
   }
 
-  if (tip.includes('你挥着铁镐开始认真挖矿')) {
+  if (/你挥着铁镐开始认真挖矿|你盘膝坐下开始闭关修炼/.test(tip)) {
     this.socketClose();
     logger.success(`「${this.userConfig.name}」退出登录`);
   }
