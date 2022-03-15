@@ -3,7 +3,7 @@ module.exports = function (data) {
   this.nowRoomId = data.path;
   switch (data.path) {
     case this.gameInfo.temple.pathId:
-      setTimeout(() => this.cmd.send(this.gameInfo.tower.way), 6e4);
+      setTimeout(() => this.cmd.send(this.gameInfo.tower.way), 3e4);
       break;
     case this.gameInfo.bank.pathId:
       this.cmd.send('pack');

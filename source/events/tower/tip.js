@@ -22,7 +22,7 @@ module.exports = function (tip) {
     clearInterval(this.timers.pfm);
     clearInterval(this.timers.up);
     this.combatFailedNum++;
-    if (this.combatFailedNum >= 5) {
+    if (this.combatFailedNum >= 3) {
       setTimeout(() => {
         this.cmd.send(this.gameInfo.bank.way);
       }, 1e4);
