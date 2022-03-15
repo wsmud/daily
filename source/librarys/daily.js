@@ -1,6 +1,8 @@
 const fs = require('fs');
 const path = require('path');
+const yaml = require('js-yaml');
 const Socket = require('./socket');
+const gameInfo = yaml.load(fs.readFileSync(path.resolve(__dirname, '../../utils/gameInfo.yaml')));
 
 module.exports = class Daily extends Socket {
   constructor(config) {
@@ -9,6 +11,7 @@ module.exports = class Daily extends Socket {
     this.userId = null;
     this.huntTaskerId = null;
     this.dungeonNum = 0;
+    this.gameInfo = gameInfo;
     this.dungeon = 'cr yz/lw/shangu';
     this.sectTaskInfo = {
       taskerId: null,

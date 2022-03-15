@@ -1,8 +1,4 @@
-const fs = require('fs');
-const path = require('path');
-const yaml = require('js-yaml');
 const logger = require('../../librarys/logger');
-const { store } = yaml.load(fs.readFileSync(path.resolve(__dirname, '../../utils/gameInfo.yaml')));
 
 module.exports = function (tip) {
   if (tip.includes('说：')) {
@@ -11,7 +7,7 @@ module.exports = function (tip) {
 
   if (tip.includes('你去帮我找')) {
     this.sectTaskInfo.taskItem = tip.match(/<.+?>.+?<\/.+?>/)[0];
-    const seller = store.find(({ goods }) => goods.includes(this.sectTaskInfo.taskItem));
+    const seller = this.gameInfo.store.find(({ goods }) => goods.includes(this.sectTaskInfo.taskItem));
     if (seller) {
       this.sectTaskInfo.seller = seller.seller;
       this.cmd.send(seller.way);

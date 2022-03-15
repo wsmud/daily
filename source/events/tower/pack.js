@@ -1,8 +1,3 @@
-const fs = require('fs');
-const path = require('path');
-const yaml = require('js-yaml');
-const { hunt } = yaml.load(fs.readFileSync(path.resolve(__dirname, '../../utils/gameInfo.yaml')));
-
 module.exports = function (data) {
   if (!data.items) {
     return;
@@ -15,5 +10,5 @@ module.exports = function (data) {
   storeList.forEach((item) => this.cmd.send(`store ${item.count} ${item.id}`));
   this.nowTask = 'hunt';
   this.attach(this.huntEvents);
-  this.cmd.send(hunt.way);
+  this.cmd.send(this.gameInfo.hunt.way);
 };

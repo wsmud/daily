@@ -1,10 +1,3 @@
-const fs = require('fs');
-const path = require('path');
-const yaml = require('js-yaml');
-const { bank, tower, temple } = yaml.load(
-  fs.readFileSync(path.resolve(__dirname, '../../utils/gameInfo.yaml')),
-);
-
 module.exports = function (tip) {
   if (tip.includes('说：')) {
     return;
@@ -22,7 +15,7 @@ module.exports = function (tip) {
     this.cmd.send('relive');
     clearInterval(this.timers.pfm);
     clearInterval(this.timers.up);
-    setTimeout(() => this.cmd.send(tower.way), 6e4);
+    setTimeout(() => this.cmd.send(this.gameInfo.tower.way), 6e4);
   }
 
   if (tip.includes('挑战失败')) {
@@ -31,11 +24,11 @@ module.exports = function (tip) {
     this.combatFailedNum++;
     if (this.combatFailedNum >= 5) {
       setTimeout(() => {
-        this.cmd.send(bank.way);
+        this.cmd.send(this.gameInfo.bank.way);
       }, 1e4);
     } else {
       setTimeout(() => {
-        this.cmd.send(temple.way);
+        this.cmd.send(this.gameInfo.temple.way);
       }, 1e4);
     }
   }
