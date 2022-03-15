@@ -1,3 +1,5 @@
+const logger = require('../../librarys/logger');
+
 module.exports = function (data) {
   if (!data.items) {
     return;
@@ -11,4 +13,5 @@ module.exports = function (data) {
   this.nowTask = 'hunt';
   this.attach(this.huntEvents);
   this.cmd.send(this.gameInfo.hunt.way);
+  logger.info(`「${this.userConfig.name}」武道塔任务完成`);
 };

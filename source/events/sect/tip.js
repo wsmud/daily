@@ -30,6 +30,7 @@ module.exports = function (tip) {
   }
 
   if (/你先去休息一下吧/.test(tip)) {
+    logger.info(`「${this.userConfig.name}」师门任务完成`);
     this.cmd.send(this.sect.chiefWay);
   }
 };

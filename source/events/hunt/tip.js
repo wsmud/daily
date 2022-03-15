@@ -14,11 +14,12 @@ module.exports = function (tip) {
   }
 
   if (/目前完成1\/20个|你的追捕任务已经完成了/.test(tip)) {
+    logger.info(`「${this.userConfig.name}」追捕任务完成`);
     this.cmd.send('jh fam 0 start;go south;go east;sell all;wakuang');
   }
 
   if (tip.includes('你挥着铁镐开始认真挖矿')) {
     this.socketClose();
-    logger.success(`「${this.userConfig.name}」任务完成`);
+    logger.success(`「${this.userConfig.name}」退出登录`);
   }
 };
