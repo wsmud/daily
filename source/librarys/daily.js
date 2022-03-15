@@ -9,7 +9,6 @@ module.exports = class Daily extends Socket {
     super(config);
     this.sect = null;
     this.userId = null;
-    this.huntTaskerId = null;
     this.dungeonNum = 0;
     this.gameInfo = gameInfo;
     this.dungeon = 'cr yz/lw/shangu';
@@ -17,6 +16,13 @@ module.exports = class Daily extends Socket {
       taskerId: null,
       taskItem: null,
       seller: null,
+    };
+    this.huntTaskInfo = {
+      taskFailedNum: 0,
+      taskerId: null,
+      name: null,
+      place: null,
+      cai: false,
     };
     this.cd = new Set();
     this.gcd = false;
