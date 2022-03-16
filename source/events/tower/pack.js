@@ -6,7 +6,7 @@ module.exports = function (data) {
   }
 
   const storeList = data.items.filter((item) => {
-    return item && /残页|突破丹/.test(item.name);
+    return item && /突破|(?<!武道)残页/.test(item.name);
   });
 
   storeList.forEach((item) => this.cmd.send(`store ${item.count} ${item.id}`));
