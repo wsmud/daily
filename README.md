@@ -15,7 +15,7 @@ node .
 ```bash
 node . --help
 
-Usage: daily [options]
+Usage: node . [options]
 
 Options:
   -r, --run         立即运行一次
