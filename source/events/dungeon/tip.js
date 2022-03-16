@@ -5,6 +5,10 @@ module.exports = function (tip) {
     return;
   }
 
+  if (global.debugMode) {
+    logger.debug(tip);
+  }
+
   if (/精力不够|扫荡完成/.test(tip)) {
     logger.info(`「${this.userConfig.name}」副本任务完成`);
     this.cmd.send(

@@ -1,6 +1,12 @@
+const logger = require('../../librarys/logger');
+
 module.exports = function (tip) {
   if (tip.includes('说：')) {
     return;
+  }
+
+  if (global.debugMode) {
+    logger.debug(tip);
   }
 
   if (tip.includes('打败我')) {

@@ -5,6 +5,10 @@ module.exports = function (tip) {
     return;
   }
 
+  if (global.debugMode) {
+    logger.debug(tip);
+  }
+
   if (tip.includes('你去帮我找')) {
     this.sectTaskInfo.taskItem = tip.match(/<.+?>.+?<\/.+?>/)[0];
     const seller = this.gameInfo.store.find(({ goods }) => goods.includes(this.sectTaskInfo.taskItem));
@@ -30,6 +34,7 @@ module.exports = function (tip) {
   }
 
   if (/你先去休息一下吧/.test(tip)) {
+    this.sect.tasker = null;
     logger.info(`「${this.userConfig.name}」师门任务完成`);
     this.cmd.send(this.sect.chiefWay);
   }
