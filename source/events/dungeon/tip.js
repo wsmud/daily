@@ -9,6 +9,17 @@ module.exports = function (tip) {
     logger.debug(tip);
   }
 
+  if  (tip.includes('你没有那么多的元宝')) {
+    logger.warning(`「${this.userConfig.name}」元宝不足`);
+    logger.info(`「${this.userConfig.name}」副本任务完成`);
+    this.cmd.send(
+      `taskover signin;taskover zz1;taskover zz2;jh fam 0 start;go south;go east;sell all`,
+    );
+    this.nowTask = 'tower';
+    this.attach(this.towerEvents);
+    this.cmd.send(this.gameInfo.tower.way);
+  }
+
   if (/精力不够|扫荡完成/.test(tip)) {
     logger.info(`「${this.userConfig.name}」副本任务完成`);
     this.cmd.send(
