@@ -10,6 +10,7 @@ yarn
 yarn cli
 #npm run cli
 node .
+node . -r #立即运行一次
 ```
 
 可搭配[screen](https://www.runoob.com/linux/linux-comm-screen.html)、[tmux](https://github.com/tmux/tmux/wiki/Getting-Started)或[pm2](https://pm2.keymetrics.io/docs/usage/quick-start/)使用。
