@@ -10,6 +10,7 @@
   "dependencies": {
     "axios": "^0.26.1",
     "chalk": "2.4.1",
+    "commander": "^9.0.0",
     "dayjs": "^1.10.8",
     "js-yaml": "^4.1.0",
     "json5": "^2.2.0",
