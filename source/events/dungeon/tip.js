@@ -9,6 +9,10 @@ module.exports = function (tip) {
     logger.debug(tip);
   }
 
+  if (tip.includes('你身上东西太多了')) {
+    this.cmd.send(`jh fam 0 start;go south;go east;sell all;${this.userConfig.dungeon} 20`);
+  }
+
   if  (tip.includes('你没有那么多的元宝')) {
     logger.warning(`「${this.userConfig.name}」元宝不足`);
     logger.info(`「${this.userConfig.name}」副本任务完成`);
