@@ -21,7 +21,7 @@ module.exports = function (data) {
       this.cmd.send(`ask2 ${item.id}`);
       this.nowTask = 'dungeon';
       this.attach(this.dungeonEvents);
-      this.cmd.send(`${this.userConfig.dungeon} 20`);
+      this.cmd.send('tasks');
     }
   }
 };
