@@ -135,10 +135,12 @@ const dungeons = {
       },
     },
   ];
+  const otherQuestions = [];
+
   const rolesAnswers = await inquirer.prompt(rolesQuestions);
-  const dungeonQuestions = [];
+
   rolesAnswers.roles.forEach(({ name }) => {
-    dungeonQuestions.push(
+    otherQuestions.push(
       {
         type: 'list',
         name,
@@ -165,16 +167,28 @@ const dungeons = {
           return dungeons[answers[name]].hard;
         },
       },
+      {
+        type: 'input',
+        name: `${name}_loginCommand`,
+        message: `${name}登录后执行的命令？`,
+      },
+      {
+        type: 'input',
+        name: `${name}_logoutCommand`,
+        message: `${name}登出前执行的命令？`,
+      },
     );
   });
 
-  const dungeonAnswers = await inquirer.prompt(dungeonQuestions);
+  const otherAnswers = await inquirer.prompt(otherQuestions);
   const fainlAnswers = rolesAnswers.roles.map((role) => {
     return {
       ...role,
-      dungeon: `cr ${dungeons[dungeonAnswers[role.name]].id} ${
-        dungeonAnswers[`${role.name}_dungeonDifficulty`] ? 1 : 0
+      dungeon: `cr ${dungeons[otherAnswers[role.name]].id} ${
+        otherAnswers[`${role.name}_dungeonDifficulty`] ? 1 : 0
       }`,
+      loginCommand: otherAnswers[`${role.name}_loginCommand`],
+      logoutCommand: otherAnswers[`${role.name}_logoutCommand`],
     };
   });
 

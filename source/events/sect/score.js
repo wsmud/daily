@@ -8,5 +8,7 @@ module.exports = function (data) {
   }
   this.sect = JSON.parse(JSON.stringify(userSect));
   this.userLevel = data.level;
-  this.cmd.send(`stopstate;${this.sect.taskerWay}`);
+  this.cmd.send('stopstate');
+  this.cmd.send(this.userConfig.loginCommand);
+  this.cmd.send(this.sect.taskerWay);
 };
