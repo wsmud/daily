@@ -9,6 +9,7 @@ module.exports = function (data) {
     if (item.name === this.gameInfo.hunt.npc) {
       this.huntTaskInfo.taskerId = item.id;
       this.cmd.send(`ask1 ${item.id}`);
+      return;
     }
 
     if (item.name === `<red>衙门逃犯</red> ${this.huntTaskInfo.name}`) {
@@ -17,10 +18,14 @@ module.exports = function (data) {
       this.cmd.send(`kill ${item.id}`, false);
       return;
     }
+
+    if (item.name === '铁匠铺老板 铁匠') {
+      this.cmd.send(`list ${item.id}`);
+      return;
+    }
   }
 
   if (
-    this.nowRoomId !== this.gameInfo.hunt.pathId &&
     this.nowRoomId !== this.gameInfo.temple.pathId &&
     !this.cmd.hasCommand()
   ) {

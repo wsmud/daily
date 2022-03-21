@@ -77,6 +77,10 @@ module.exports = function (tip) {
     );
   }
 
+  if (tip.includes('你身上没有挖矿工具')) {
+    this.cmd.send('jh fam 0 start;go east;go east;go south');
+  }
+
   if (/你挥着铁镐开始认真挖矿|你盘膝坐下开始闭关修炼/.test(tip)) {
     this.socketClose();
     logger.success(`「${this.userConfig.name}」退出登录`);
