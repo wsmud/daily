@@ -24,6 +24,11 @@ module.exports = function (tip) {
     setTimeout(() => this.cmd.send(this.gameInfo.tower.way), 6e4);
   }
 
+  if (tip.includes('只能在战斗中使用')) {
+    this.isCombat = false;
+    clearInterval(this.timers.pfm);
+  }
+
   if (tip.includes('挑战失败')) {
     clearInterval(this.timers.pfm);
     clearInterval(this.timers.up);

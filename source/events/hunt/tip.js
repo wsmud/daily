@@ -9,6 +9,13 @@ module.exports = function (tip) {
     logger.debug(tip);
   }
 
+  if (!this.isCombat && tip.includes('不要急，慢慢来')) {
+    this.cmd.stop = true;
+    setTimeout(() => {
+      this.cmd.commandAgain();
+    }, 3e3);
+  }
+
   if (tip.includes('你的扫荡符不够')) {
     this.cmd.send(`shop 0 20;ask3 ${this.huntTaskInfo.taskerId}`);
   }
@@ -75,6 +82,11 @@ module.exports = function (tip) {
         ? 'jh fam 0 start;go west;go west;go north;go enter;go west;xiulian'
         : 'wakuang',
     );
+  }
+
+  if (tip.includes('只能在战斗中使用')) {
+    this.isCombat = false;
+    clearInterval(this.timers.pfm);
   }
 
   if (tip.includes('你身上没有挖矿工具')) {

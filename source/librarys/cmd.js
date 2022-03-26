@@ -4,6 +4,8 @@ module.exports = class Cmd {
 
   constructor(socket) {
     this.#socket = socket;
+    this.stop = false;
+    this.lastCommand = '';
   }
 
   send(commandString, wait = true) {
@@ -29,13 +31,19 @@ module.exports = class Cmd {
   }
 
   commandAgain() {
+    if (!this.lastCommand) {
+      return;
+    }
+
+    this.stop = false;
     this.#commandList = [...this.#commandList, this.lastCommand];
+    this.lastCommand = '';
     this.#commandQueue();
   }
 
   #commandQueue() {
     const nowTime = new Date().getTime();
-    if (!this.hasCommand() || this.#socket.readyState !== 1) {
+    if (this.stop || !this.hasCommand() || this.#socket.readyState !== 1) {
       return;
     }
 
