@@ -6,7 +6,7 @@ module.exports = function (tip) {
   }
 
   if (global.debugMode) {
-    logger.debug(`「${this.userConfig.name}」 ${tip}`);
+    logger.debug(`「${this.userConfig.name}」${tip}`);
   }
 
   if (tip.includes('你身上东西太多了')) {

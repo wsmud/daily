@@ -1,3 +1,5 @@
+const logger = require('../../librarys/logger');
+
 module.exports = function (data) {
   this.isCombat = false;
   this.nowRoomId = data.path;
@@ -10,5 +12,9 @@ module.exports = function (data) {
       break;
     default:
       break;
+  }
+
+  if (global.debugMode) {
+    logger.debug(`「${this.userConfig.name}」当前房间：${data.name}`);
   }
 };

@@ -1,3 +1,5 @@
+const logger = require('../../librarys/logger');
+
 module.exports = function (data) {
   this.isCombat = false;
   this.nowRoomId = data.path;
@@ -10,5 +12,9 @@ module.exports = function (data) {
         this.cmd.send(this.gameInfo.hunt.path[this.huntTaskInfo.place]);
       }
     }, 4e4);
+  }
+
+  if (global.debugMode) {
+    logger.debug(`「${this.userConfig.name}」当前房间：${data.name}`);
   }
 };
