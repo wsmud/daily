@@ -1,7 +1,7 @@
 const logger = require('../../librarys/logger');
 
 module.exports = function (data) {
-  if (!data.items) {
+  if (this.nowRoomId !== this.gameInfo.bank.pathId || !data.items) {
     return;
   }
 
