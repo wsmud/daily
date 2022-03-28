@@ -1,5 +1,7 @@
+const fs = require('fs');
 const chalk = require('chalk');
 const dayjs = require('dayjs');
+const { EOL } = require('os');
 
 dayjs.locale('zh-cn');
 
@@ -12,7 +14,9 @@ function print(msg, type = 'info') {
     debug: 'cyan',
   };
 
-  console.log('%s [%s]: %s', dayjs().format('YYYY-MM-DD HH:mm:ss'), chalk[color[type]](type), msg);
+  const logMsg = `${dayjs().format('YYYY-MM-DD HH:mm:ss')} ${chalk[color[type]](type)} ${msg}`;
+  fs.appendFileSync('daily.log', logMsg + EOL);
+  console.log(logMsg);
 }
 
 function success(msg) {
@@ -41,4 +45,4 @@ module.exports = {
   error,
   info,
   debug,
-}
+};
