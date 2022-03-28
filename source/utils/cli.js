@@ -168,6 +168,13 @@ const dungeons = {
         },
       },
       {
+        type: 'confirm',
+        name: `${name}_sectDungeon`,
+        message: `${name}是否扫荡古宗门？`,
+        default: false,
+      },
+
+      {
         type: 'input',
         name: `${name}_loginCommand`,
         message: `${name}登录后执行的命令？`,
@@ -187,6 +194,7 @@ const dungeons = {
       dungeon: `cr ${dungeons[otherAnswers[role.name]].id} ${
         otherAnswers[`${role.name}_dungeonDifficulty`] ? 1 : 0
       }`,
+      sectDungeon: otherAnswers[`${role.name}_sectDungeon`],
       loginCommand: otherAnswers[`${role.name}_loginCommand`],
       logoutCommand: otherAnswers[`${role.name}_logoutCommand`],
     };

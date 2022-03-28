@@ -10,8 +10,10 @@ module.exports = function (data) {
   });
 
   storeList.forEach((item) => this.cmd.send(`store ${item.count} ${item.id}`));
-  this.nowTask = 'hunt';
-  this.attach(this.huntEvents);
-  this.cmd.send(this.gameInfo.hunt.way);
+  this.nowTask = this.userConfig.sectDungeon ? 'sectDungeon' : 'hunt';
+  this.attach(this.userConfig.sectDungeon ? this.sectDungeonEvents : this.huntEvents);
+  this.cmd.send(
+    this.userConfig.sectDungeon ? 'jh fam 9 start;go enter;go up' : this.gameInfo.hunt.way,
+  );
   logger.info(`「${this.userConfig.name}」武道塔任务完成`);
 };

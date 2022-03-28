@@ -41,6 +41,7 @@ module.exports = class Daily extends Socket {
     this.dungeonEvents = [];
     this.towerEvents = [];
     this.huntEvents = [];
+    this.sectDungeonEvents = [];
     this.loadEvents();
   }
 
@@ -49,6 +50,7 @@ module.exports = class Daily extends Socket {
     this.dungeonEvents = this.loadEvent('dungeon');
     this.towerEvents = this.loadEvent('tower');
     this.huntEvents = this.loadEvent('hunt');
+    this.sectDungeonEvents = this.loadEvent('sectDungeon');
     this.attach(this.sectEvents);
   }
 
