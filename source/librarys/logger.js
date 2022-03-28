@@ -14,7 +14,7 @@ function print(msg, type = 'info') {
     debug: 'cyan',
   };
 
-  const logMsg = `${dayjs().format('YYYY-MM-DD HH:mm:ss')} ${chalk[color[type]](type)} ${msg}`;
+  const logMsg = `${dayjs().format('YYYY-MM-DD HH:mm:ss')} [${chalk[color[type]](type)}] ${msg}`;
   fs.appendFileSync('daily.log', logMsg + EOL);
   console.log(logMsg);
 }
