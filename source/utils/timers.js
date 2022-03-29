@@ -1,4 +1,5 @@
 const skillPriority = {
+  'force.zhen': 0,
   'force.xin': 0,
   'force.cui': 0,
   'dodge.zhui': 1,
@@ -23,7 +24,6 @@ const skillPriority = {
   'blade.ref': 6,
   'throwing.luo': 6,
   'swors.ji': 6,
-  'force.zhen': 99,
 };
 
 function up() {
@@ -48,6 +48,7 @@ function pfm() {
     const skillsBPriority = skillPriority[b] ? skillPriority[b] : 999;
     return skillsAPriority - skillsBPriority;
   });
+
 
   const canUseSkill = sortSkills.find((skill) => skill !== 'force.tuoli' && !this.cd.has(skill));
   canUseSkill && this.cmd.send(`perform ${canUseSkill}`, false);

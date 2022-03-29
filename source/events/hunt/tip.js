@@ -48,6 +48,7 @@ module.exports = function (tip) {
       this.huntTaskInfo.taskFailedNum++;
     }
 
+    this.cmd.commandClear();
     if (this.huntTaskInfo.cai) {
       logger.info(`「${this.userConfig.name}」追捕任务已完成`);
       this.cmd.send(this.userConfig.logoutCommand);
@@ -59,7 +60,6 @@ module.exports = function (tip) {
       return;
     }
 
-    this.cmd.commandClear();
     this.cmd.send(this.gameInfo.hunt.way);
   }
 

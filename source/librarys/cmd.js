@@ -1,10 +1,13 @@
+const logger = require('./logger');
+
 module.exports = class Cmd {
   #socket;
   #commandList = [];
 
-  constructor(socket) {
+  constructor(socket, name) {
     this.#socket = socket;
     this.stop = false;
+    this.name = name;
     this.lastCommand = '';
   }
 
@@ -55,6 +58,10 @@ module.exports = class Cmd {
     this.lastCommand = this.#commandList.shift();
     this.#socket.send(this.lastCommand);
     this.lastCommandTime = nowTime;
+
+    if (global.debugMode) {
+      logger.debug(`「${this.name}」${this.lastCommand}`);
+    }
 
     if (this.hasCommand()) {
       setTimeout(() => this.#commandQueue(), 1e2);

@@ -21,7 +21,7 @@ module.exports = class Socket extends EventEmitter {
     } catch ({ message }) {
       this.emit('ERROR', message);
     }
-    this.cmd = new Cmd(this.#socket);
+    this.cmd = new Cmd(this.#socket, this.userConfig.name);
   }
 
   #onOpen() {
@@ -53,4 +53,4 @@ module.exports = class Socket extends EventEmitter {
   socketClose() {
     this.#socket.close();
   }
-}
+};
