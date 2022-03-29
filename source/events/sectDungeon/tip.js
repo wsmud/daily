@@ -1,9 +1,7 @@
 const logger = require('../../librarys/logger');
 
 module.exports = function (tip) {
-  if (global.debugMode) {
-    logger.debug(`「${this.userConfig.name}」${tip}`);
-  }
+  logger.debug(`「${this.userConfig.name}」${tip}`);
 
   if (/打败我|你要进入哪个副本|没有那么多的元宝/.test(tip)) {
     logger.warning(`「${this.userConfig.name}」古宗门任务失败`);

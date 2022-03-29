@@ -6,9 +6,7 @@ module.exports = class Cmd {
 
   constructor(socket, name) {
     this.#socket = socket;
-    this.stop = false;
     this.name = name;
-    this.lastCommand = '';
   }
 
   send(commandString, wait = true) {
@@ -33,20 +31,9 @@ module.exports = class Cmd {
     return this.#commandList.length > 0;
   }
 
-  commandAgain() {
-    if (!this.lastCommand) {
-      return;
-    }
-
-    this.stop = false;
-    this.#commandList = [...this.#commandList, this.lastCommand];
-    this.lastCommand = '';
-    this.#commandQueue();
-  }
-
   #commandQueue() {
     const nowTime = new Date().getTime();
-    if (this.stop || !this.hasCommand() || this.#socket.readyState !== 1) {
+    if (!this.hasCommand() || this.#socket.readyState !== 1) {
       return;
     }
 
@@ -55,13 +42,11 @@ module.exports = class Cmd {
       return;
     }
 
-    this.lastCommand = this.#commandList.shift();
-    this.#socket.send(this.lastCommand);
+    const command = this.#commandList.shift();
+    this.#socket.send(command);
     this.lastCommandTime = nowTime;
 
-    if (global.debugMode) {
-      logger.debug(`「${this.name}」${this.lastCommand}`);
-    }
+    logger.debug(`「${this.name}」${command}`);
 
     if (this.hasCommand()) {
       setTimeout(() => this.#commandQueue(), 1e2);

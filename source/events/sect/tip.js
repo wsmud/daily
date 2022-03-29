@@ -5,9 +5,7 @@ module.exports = function (tip) {
     return;
   }
 
-  if (global.debugMode) {
-    logger.debug(`「${this.userConfig.name}」${tip}`);
-  }
+  logger.debug(`「${this.userConfig.name}」${tip}`);
 
   if (tip.includes('你去帮我找')) {
     this.sectTaskInfo.taskItem = tip.match(/<.+?>.+?<\/.+?>/)[0];

@@ -25,10 +25,11 @@ module.exports = function (data) {
     }
   }
 
-  if (
-    this.nowRoomId !== this.gameInfo.temple.pathId &&
-    !this.cmd.hasCommand()
-  ) {
-    this.cmd.send(this.gameInfo.hunt.path[this.huntTaskInfo.place]);
+  if (this.huntTaskInfo.place && this.huntTaskInfo.nowTaskWay.length < 1) {
+    this.huntTaskInfo.nowTaskWay = JSON.parse(
+      JSON.stringify(this.gameInfo.hunt.path[this.huntTaskInfo.place].split(';')),
+    );
   }
+  this.nowRoomId !== this.gameInfo.temple.pathId &&
+    this.cmd.send(this.huntTaskInfo.nowTaskWay.shift());
 };

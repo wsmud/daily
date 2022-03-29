@@ -5,16 +5,7 @@ module.exports = function (tip) {
     return;
   }
 
-  if (global.debugMode) {
-    logger.debug(`「${this.userConfig.name}」${tip}`);
-  }
-
-  if (!this.isCombat && tip.includes('不要急，慢慢来')) {
-    this.cmd.stop = true;
-    setTimeout(() => {
-      this.cmd.commandAgain();
-    }, 3e3);
-  }
+  logger.debug(`「${this.userConfig.name}」${tip}`);
 
   if (tip.includes('你的扫荡符不够')) {
     this.cmd.send(`shop 0 20;ask3 ${this.huntTaskInfo.taskerId}`);
@@ -40,7 +31,10 @@ module.exports = function (tip) {
       return;
     }
 
-    this.cmd.send(this.gameInfo.hunt.path[this.huntTaskInfo.place]);
+    this.huntTaskInfo.nowTaskWay = JSON.parse(
+      JSON.stringify(this.gameInfo.hunt.path[this.huntTaskInfo.place].split(';')),
+    );
+    this.cmd.send(this.huntTaskInfo.nowTaskWay.shift());
   }
 
   if (/你的追捕任务完成了|你的追捕任务失败了/.test(tip)) {
@@ -49,6 +43,8 @@ module.exports = function (tip) {
     }
 
     this.cmd.commandClear();
+    this.huntTaskInfo.place = null;
+    this.huntTaskInfo.nowTaskWay = [];
     if (this.huntTaskInfo.cai) {
       logger.info(`「${this.userConfig.name}」追捕任务已完成`);
       this.cmd.send(this.userConfig.logoutCommand);

@@ -5,9 +5,7 @@ module.exports = function (tip) {
     return;
   }
 
-  if (global.debugMode) {
-    logger.debug(`「${this.userConfig.name}」${tip}`);
-  }
+  logger.debug(`「${this.userConfig.name}」${tip}`);
 
   if (tip.includes('打败我')) {
     this.cmd.send(`kill ${this.towerGuardianId}`);
@@ -33,7 +31,7 @@ module.exports = function (tip) {
     clearInterval(this.timers.pfm);
     clearInterval(this.timers.up);
     this.combatFailedNum++;
-    if (this.combatFailedNum >= 3) {
+    if (this.combatFailedNum >= 1) {
       this.combatFailedNum = 0;
       setTimeout(() => {
         this.cmd.send(this.gameInfo.bank.way);

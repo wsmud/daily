@@ -36,7 +36,9 @@ function info(msg) {
 }
 
 function debug(msg) {
-  print(msg, 'debug');
+  if (global.debugMode) {
+    print(msg, 'debug');
+  }
 }
 
 module.exports = {

@@ -20,6 +20,7 @@ module.exports = class Daily extends Socket {
     this.huntTaskInfo = {
       taskFailedNum: 0,
       taskerId: null,
+      nowTaskWay: [],
       name: null,
       place: null,
       cai: false,
