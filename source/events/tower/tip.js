@@ -31,7 +31,7 @@ module.exports = function (tip) {
     clearInterval(this.timers.pfm);
     clearInterval(this.timers.up);
     this.combatFailedNum++;
-    if (this.combatFailedNum >= 1) {
+    if (this.combatFailedNum >= 3) {
       this.combatFailedNum = 0;
       setTimeout(() => {
         this.cmd.send(this.gameInfo.bank.way);
