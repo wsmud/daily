@@ -30,6 +30,9 @@ module.exports = function (data) {
       JSON.stringify(this.gameInfo.hunt.path[this.huntTaskInfo.place].split(';')),
     );
   }
-  this.nowRoomId !== this.gameInfo.temple.pathId &&
-    this.cmd.send(this.huntTaskInfo.nowTaskWay.shift());
+  if (this.nowRoomId !== this.gameInfo.temple.pathId) {
+    const cmd = this.huntTaskInfo.nowTaskWay.shift();
+    this.cmd.send(cmd);
+    cmd === 'break bi' && this.cmd.send(this.huntTaskInfo.nowTaskWay.shift());
+  }
 };
