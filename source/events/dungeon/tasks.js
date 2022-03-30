@@ -7,6 +7,7 @@ module.exports = function (data) {
     this.cmd.send(
       `taskover signin;taskover zz1;taskover zz2;jh fam 0 start;go south;go east;sell all`,
     );
+    this.dungeonOver = true;
     this.nowTask = 'tower';
     this.attach(this.towerEvents);
     this.cmd.send(this.gameInfo.tower.way);

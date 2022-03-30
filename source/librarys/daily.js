@@ -30,6 +30,7 @@ module.exports = class Daily extends Socket {
     this.isCombat = false;
     this.userSkills = null;
     this.userStatus = new Set();
+    this.dungeonOver = false;
     this.combatFailedNum = 0;
     this.towerGuardianId = null;
     this.nowRoomId = null;

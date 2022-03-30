@@ -24,6 +24,7 @@ const skillPriority = {
   'blade.ref': 6,
   'throwing.luo': 6,
   'swors.ji': 6,
+  'unarmed.ref': 9999,
 };
 
 function up() {
