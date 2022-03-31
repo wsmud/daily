@@ -13,6 +13,4 @@ module.exports = function (data) {
     default:
       break;
   }
-
-  logger.debug(`「${this.userConfig.name}」当前房间：${data.name}`);
 };

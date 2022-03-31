@@ -1,11 +1,7 @@
-const logger = require('../../librarys/logger');
-
 module.exports = function (tip) {
   if (tip.includes('说：')) {
     return;
   }
-
-  logger.debug(`「${this.userConfig.name}」${tip}`);
 
   if (tip.includes('打败我')) {
     this.cmd.send(`kill ${this.towerGuardianId}`);

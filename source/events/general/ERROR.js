@@ -1,4 +1,4 @@
-const { error } = require('../librarys/logger');
+const { error } = require('../../librarys/logger');
 
 module.exports = function(data) {
   error(data);

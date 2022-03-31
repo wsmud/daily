@@ -5,8 +5,6 @@ module.exports = function (tip) {
     return;
   }
 
-  logger.debug(`「${this.userConfig.name}」${tip}`);
-
   if (tip.includes('你身上东西太多了')) {
     this.cmd.send(`jh fam 0 start;go south;go east;sell all;${this.userConfig.dungeon} 20`);
   }

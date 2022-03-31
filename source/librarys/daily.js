@@ -44,10 +44,12 @@ module.exports = class Daily extends Socket {
     this.towerEvents = [];
     this.huntEvents = [];
     this.sectDungeonEvents = [];
+    this.generalEvents = [];
     this.loadEvents();
   }
 
   loadEvents() {
+    this.generalEvents = this.loadEvent('general');
     this.sectEvents = this.loadEvent('sect');
     this.dungeonEvents = this.loadEvent('dungeon');
     this.towerEvents = this.loadEvent('tower');
@@ -66,8 +68,10 @@ module.exports = class Daily extends Socket {
   attach(events) {
     const [onClose] = this.listeners('CLOSE');
     this.removeAllListeners();
-    this.on('ERROR', require('../events/ERROR'));
     onClose && this.on('CLOSE', onClose);
+    this.generalEvents.forEach((name) => {
+      this.on(name, require(`../events/general/${name}`));
+    });
     events.forEach((name) => {
       this.on(name, require(`../events/${this.nowTask}/${name}`));
     });

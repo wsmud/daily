@@ -5,8 +5,6 @@ module.exports = function (tip) {
     return;
   }
 
-  logger.debug(`「${this.userConfig.name}」${tip}`);
-
   if (tip.includes('你的扫荡符不够')) {
     this.cmd.send(`shop 0 20;ask3 ${this.huntTaskInfo.taskerId}`);
   }

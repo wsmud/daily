@@ -5,8 +5,6 @@ module.exports = function (tip) {
     return;
   }
 
-  logger.debug(`「${this.userConfig.name}」${tip}`);
-
   if (tip.includes('你去帮我找')) {
     this.sectTaskInfo.taskItem = tip.match(/<.+?>.+?<\/.+?>/)[0];
     const seller = this.gameInfo.store.find(({ goods }) => goods.includes(this.sectTaskInfo.taskItem));
