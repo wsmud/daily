@@ -34,6 +34,9 @@ module.exports = function (tip) {
     this.huntTaskInfo.nowTaskWay = JSON.parse(
       JSON.stringify(this.gameInfo.hunt.path[this.huntTaskInfo.place].split(';')),
     );
+
+    this.combatFailedNum = 0;
+    this.huntTaskInfo.taskFailedNum = 0;
     this.cmd.send(this.huntTaskInfo.nowTaskWay.shift());
   }
 
