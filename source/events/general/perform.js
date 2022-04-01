@@ -6,6 +6,7 @@ const skillPriority = {
   'blade.shi': 1,
   'sword.wu': 1,
   'sword.yi': 1,
+  'dodge.gui': 1,
   'force.zhen': 2,
   'dodge.fo': 2,
   'dodge.power': 2,
