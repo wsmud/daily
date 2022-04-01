@@ -16,7 +16,6 @@ function pfm() {
   }
 
   const canUseSkill = this.userSkills.find((skill) => !this.cd.has(skill));
-  console.log(canUseSkill, this.userSkills)
   canUseSkill && this.cmd.send(`perform ${canUseSkill}`, false);
 }
 
