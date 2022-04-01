@@ -46,18 +46,20 @@ module.exports = function (tip) {
     this.cmd.commandClear();
     this.huntTaskInfo.place = null;
     this.huntTaskInfo.nowTaskWay = [];
-    if (this.huntTaskInfo.cai) {
-      logger.info(`「${this.userConfig.name}」追捕任务已完成`);
-      this.cmd.send(this.userConfig.logoutCommand);
-      this.cmd.send(
-        /ord|hio/.test(this.userLevel)
-          ? 'jh fam 0 start;go west;go west;go north;go enter;go west;xiulian'
-          : 'wakuang',
-      );
-      return;
-    }
+    setTimeout(() => {
+      if (this.huntTaskInfo.cai) {
+        logger.info(`「${this.userConfig.name}」追捕任务已完成`);
+        this.cmd.send(this.userConfig.logoutCommand);
+        this.cmd.send(
+          /ord|hio/.test(this.userLevel)
+            ? 'jh fam 0 start;go west;go west;go north;go enter;go west;xiulian'
+            : 'wakuang',
+        );
+        return;
+      }
 
-    this.cmd.send(this.gameInfo.hunt.way);
+      this.cmd.send(this.gameInfo.hunt.way);
+    }, 3e3);
   }
 
   if (tip.includes('你不是在追捕吗')) {

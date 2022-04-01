@@ -13,7 +13,6 @@ module.exports = function (data) {
     }
 
     if (item.name === `<red>衙门逃犯</red> ${this.huntTaskInfo.name}`) {
-      this.timers.pfm = setInterval(pfm.bind(this), 500);
       this.cmd.commandClear();
       this.cmd.send(`kill ${item.id}`, false);
       return;

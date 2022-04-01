@@ -9,7 +9,6 @@ module.exports = function (data) {
     if (item.name === this.gameInfo.tower.npc) {
       this.cmd.send(`ask1 ${item.id};go enter`);
       this.timers.up = setInterval(timers.up.bind(this), 3e3);
-      this.timers.pfm = setInterval(timers.pfm.bind(this), 5e2);
     }
 
     if (item.name.includes(this.gameInfo.tower.guardianTitle)) {

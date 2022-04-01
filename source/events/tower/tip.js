@@ -13,7 +13,6 @@ module.exports = function (tip) {
 
   if (tip.includes('灵魂状态')) {
     this.cmd.send('relive');
-    clearInterval(this.timers.pfm);
     clearInterval(this.timers.up);
     setTimeout(() => this.cmd.send(this.gameInfo.tower.way), 6e4);
   }
@@ -24,7 +23,6 @@ module.exports = function (tip) {
   }
 
   if (tip.includes('挑战失败')) {
-    clearInterval(this.timers.pfm);
     clearInterval(this.timers.up);
     this.combatFailedNum++;
     if (this.combatFailedNum >= 3) {
