@@ -24,16 +24,19 @@ function loginQueue(configs, userConfig) {
   });
 }
 
-if (options.run) {
+function run() {
   const configs = yaml.load(fs.readFileSync('config.yaml'));
-  configs.splice(0, 30).forEach((userConfig) => {
+  const roles = Array.isArray(configs) ? configs : configs.roles;
+  global.pushplusToken = configs.pushplus ? configs.pushplus : '';
+  roles.splice(0, 30).forEach((userConfig) => {
     loginQueue(configs, userConfig);
   });
 }
 
+if (options.run) {
+  run();
+}
+
 schedule.scheduleJob(options.time ? options.time : '5 5 5 * * *', () => {
-  const configs = yaml.load(fs.readFileSync('config.yaml'));
-  configs.splice(0, 30).forEach((userConfig) => {
-    loginQueue(configs, userConfig);
-  });
+  run();
 });

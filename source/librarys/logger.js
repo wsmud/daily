@@ -2,6 +2,7 @@ const fs = require('fs');
 const chalk = require('chalk');
 const dayjs = require('dayjs');
 const { EOL } = require('os');
+const pushplus = require('../utils/pushplus');
 
 dayjs.locale('zh-cn');
 
@@ -25,10 +26,12 @@ function success(msg) {
 
 function warning(msg) {
   print(msg, 'warning');
+  pushplus(msg);
 }
 
 function error(msg) {
   print(msg, 'error');
+  pushplus(msg);
 }
 
 function info(msg) {

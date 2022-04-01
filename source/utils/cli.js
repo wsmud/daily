@@ -50,11 +50,17 @@ const dungeons = {
     {
       type: 'confirm',
       name: 'add',
-      message: '检测到配置文件，是否向原配置文件新增',
+      message: '检测到配置文件，是否向原配置文件新增？',
       default: true,
       when() {
         return fs.existsSync('config.yaml') && fs.statSync('config.yaml').isFile();
       },
+    },
+    {
+      type: 'input',
+      name: 'pushplus',
+      message: 'pushplus的推送token？',
+      default: '',
     },
     {
       type: 'list',
@@ -188,30 +194,38 @@ const dungeons = {
   });
 
   const otherAnswers = await inquirer.prompt(otherQuestions);
-  const fainlAnswers = rolesAnswers.roles.map((role) => {
-    return {
-      ...role,
-      dungeon: `cr ${dungeons[otherAnswers[role.name]].id} ${
-        otherAnswers[`${role.name}_dungeonDifficulty`] ? 1 : 0
-      }`,
-      sectDungeon: otherAnswers[`${role.name}_sectDungeon`],
-      loginCommand: otherAnswers[`${role.name}_loginCommand`],
-      logoutCommand: otherAnswers[`${role.name}_logoutCommand`],
-    };
-  });
+  const fainlAnswers = {
+    pushplus: rolesAnswers.pushplus,
+    roles: rolesAnswers.roles.map((role) => {
+      return {
+        ...role,
+        dungeon: `cr ${dungeons[otherAnswers[role.name]].id} ${
+          otherAnswers[`${role.name}_dungeonDifficulty`] ? 1 : 0
+        }`,
+        sectDungeon: otherAnswers[`${role.name}_sectDungeon`],
+        loginCommand: otherAnswers[`${role.name}_loginCommand`],
+        logoutCommand: otherAnswers[`${role.name}_logoutCommand`],
+      };
+    }),
+  };
 
   if (fs.existsSync('config.yaml') && fs.statSync('config.yaml').isFile() && rolesAnswers.add) {
-    let oldConfig = yaml.load(fs.readFileSync('config.yaml'));
+    const oldConfig = yaml.load(fs.readFileSync('config.yaml'));
     !oldConfig && (oldConfig = []);
-    fainlAnswers.forEach((userConfig) => {
-      const oldConfigIndex = oldConfig.findIndex(({ name }) => name === userConfig.name);
-      if (oldConfigIndex >= 0) {
-        oldConfig.splice(oldConfigIndex, 1, userConfig);
+    let oldRoles = Array.isArray(oldConfig) ? oldConfig : oldConfig.roles;
+    fainlAnswers.roles.forEach((userRole) => {
+      const oldRolesIndex = oldRoles.findIndex(({ name }) => name === userRole.name);
+      if (oldRolesIndex >= 0) {
+        oldRoles.splice(oldRolesIndex, 1, userRole);
       } else {
-        oldConfig.push(userConfig);
+        oldRoles.push(userRole);
       }
     });
-    fs.writeFileSync('config.yaml', yaml.dump(oldConfig));
+
+    fs.writeFileSync(
+      'config.yaml',
+      yaml.dump({ pushplus: fainlAnswers.pushplus, roles: oldRoles }),
+    );
   } else {
     fs.writeFileSync('config.yaml', yaml.dump(fainlAnswers));
   }
