@@ -38,6 +38,13 @@ module.exports = function (tip) {
     this.cmd.send(this.huntTaskInfo.nowTaskWay.shift());
   }
 
+  if (tip.includes('你要攻击谁')) {
+    this.huntTaskInfo.nowTaskWay = JSON.parse(
+      JSON.stringify(this.gameInfo.hunt.path[this.huntTaskInfo.place].split(';')),
+    );
+    this.cmd.send(this.huntTaskInfo.nowTaskWay.shift());
+  }
+
   if (/你的追捕任务完成了|你的追捕任务失败了/.test(tip)) {
     if (tip.includes('失败了')) {
       this.huntTaskInfo.taskFailedNum++;
