@@ -1,7 +1,7 @@
 const { fix } = require('../../utils/timers');
 
 module.exports = function (data) {
-  clearTimeout(this.timer.fix);
+  clearTimeout(this.timers.fix);
 
   for (const item of data.items) {
     if (!item || item.p || !item.name) {
