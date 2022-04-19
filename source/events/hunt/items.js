@@ -33,7 +33,8 @@ module.exports = function (data) {
   }
 
   if (this.nowRoomId !== this.gameInfo.temple.pathId) {
-    this.cmd.send(this.huntTaskInfo.nowTaskWay.shift());
+    const cmd = this.huntTaskInfo.nowTaskWay.shift();
+    this.cmd.send(cmd);
     cmd === 'break bi' && this.cmd.send(this.huntTaskInfo.nowTaskWay.shift(), false);
     this.timers.fix = setTimeout(fix.bind(this), 6e4);
   }
