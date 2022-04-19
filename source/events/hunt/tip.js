@@ -38,6 +38,10 @@ module.exports = function (tip) {
     this.cmd.send(this.huntTaskInfo.nowTaskWay.shift());
   }
 
+  if (tip.includes('石壁的石头掉了下来')) {
+    this.cmd.send('break bi;go enter');
+  }
+
   if (tip.includes('你要攻击谁')) {
     this.huntTaskInfo.nowTaskWay = JSON.parse(
       JSON.stringify(this.gameInfo.hunt.path[this.huntTaskInfo.place].split(';')),
