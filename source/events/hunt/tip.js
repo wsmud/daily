@@ -104,6 +104,8 @@ module.exports = function (tip) {
   }
 
   if (/你挥着铁镐开始认真挖矿|你盘膝坐下开始闭关修炼/.test(tip)) {
+    clearTimeout(this.timer.fix);
+    clearInterval(this.timers.pfm);
     this.socketClose();
     logger.success(`「${this.userConfig.name}」退出登录`);
   }

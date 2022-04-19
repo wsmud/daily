@@ -1,6 +1,8 @@
-const { pfm } = require('../../utils/timers');
+const { fix } = require('../../utils/timers');
 
 module.exports = function (data) {
+  clearTimeout(this.timer.fix);
+
   for (const item of data.items) {
     if (!item || item.p || !item.name) {
       continue;
@@ -29,9 +31,10 @@ module.exports = function (data) {
       JSON.stringify(this.gameInfo.hunt.path[this.huntTaskInfo.place].split(';')),
     );
   }
+
   if (this.nowRoomId !== this.gameInfo.temple.pathId) {
-    const cmd = this.huntTaskInfo.nowTaskWay.shift();
-    this.cmd.send(cmd);
+    this.cmd.send(this.huntTaskInfo.nowTaskWay.shift());
     cmd === 'break bi' && this.cmd.send(this.huntTaskInfo.nowTaskWay.shift(), false);
+    this.timers.fix = setTimeout(fix.bind(this), 6e4);
   }
 };

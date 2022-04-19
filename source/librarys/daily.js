@@ -37,6 +37,7 @@ module.exports = class Daily extends Socket {
     this.timers = {
       up: null,
       pfm: null,
+      fix: null,
     };
     this.nowTask = 'sect';
     this.sectEvents = [];

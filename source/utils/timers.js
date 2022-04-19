@@ -19,7 +19,15 @@ function pfm() {
   canUseSkill && this.cmd.send(`perform ${canUseSkill}`, false);
 }
 
+function fix() {
+  this.huntTaskInfo.nowTaskWay = JSON.parse(
+    JSON.stringify(this.gameInfo.hunt.path[this.huntTaskInfo.place].split(';')),
+  );
+  this.cmd.send(this.huntTaskInfo.nowTaskWay.shift());
+}
+
 module.exports = {
   up,
   pfm,
+  fix,
 };
