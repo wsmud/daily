@@ -32,6 +32,6 @@ module.exports = function (data) {
   if (this.nowRoomId !== this.gameInfo.temple.pathId) {
     const cmd = this.huntTaskInfo.nowTaskWay.shift();
     this.cmd.send(cmd);
-    cmd === 'break bi' && this.cmd.send(this.huntTaskInfo.nowTaskWay.shift());
+    cmd === 'break bi' && this.cmd.send(this.huntTaskInfo.nowTaskWay.shift(), false);
   }
 };
