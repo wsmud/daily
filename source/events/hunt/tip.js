@@ -42,6 +42,12 @@ module.exports = function (tip) {
     this.cmd.send('break bi;go enter');
   }
 
+  if (tip.includes('你现在没办法移动')) {
+    setTimeout(() => {
+      this.cmd.send(this.gameInfo.hunt.way);
+    }, 3e4);
+  }
+
   if (tip.includes('你要攻击谁')) {
     this.huntTaskInfo.nowTaskWay = JSON.parse(
       JSON.stringify(this.gameInfo.hunt.path[this.huntTaskInfo.place].split(';')),
