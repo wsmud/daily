@@ -3,7 +3,7 @@ const { stringify } = require('qs');
 
 module.exports = async function getToken(account, password) {
   const res = await axios.post(
-    'http://game.wsmud.com/userapi/login',
+    'http://www.wamud.com/UserApi/Login',
     stringify({ code: account, pwd: password }),
   );
 
@@ -13,4 +13,4 @@ module.exports = async function getToken(account, password) {
 
   const token = res.headers['set-cookie'].map((cookie) => cookie.match(/^(u|p)=(.+?);/)[2]);
   return token.join(' ');
-}
+};
