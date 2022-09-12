@@ -20,6 +20,10 @@ function pfm() {
 }
 
 function fix() {
+  if (!this.huntTaskInfo.place) {
+    return;
+  }
+
   this.huntTaskInfo.nowTaskWay = JSON.parse(
     JSON.stringify(this.gameInfo.hunt.path[this.huntTaskInfo.place].split(';')),
   );

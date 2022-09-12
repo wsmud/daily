@@ -11,9 +11,7 @@ module.exports = class Socket extends EventEmitter {
     this.userConfig = config;
 
     try {
-      this.#socket = new WebSocket(this.userConfig.server, {
-        origin: 'http://game.wsmud.com',
-      });
+      this.#socket = new WebSocket(this.userConfig.server);
       this.#socket.onopen = this.#onOpen.bind(this);
       this.#socket.onclose = this.#onClose.bind(this);
       this.#socket.onerror = this.#onError.bind(this);
