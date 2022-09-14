@@ -11,6 +11,7 @@
     "axios": "^0.26.1",
     "chalk": "2.4.1",
     "commander": "^9.0.0",
+    "cron-parser": "^4.6.0",
     "dayjs": "^1.10.8",
     "inquirer": "^8.2.1",
     "js-yaml": "^4.1.0",
