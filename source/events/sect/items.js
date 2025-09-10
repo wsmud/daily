@@ -19,9 +19,9 @@ module.exports = function (data) {
 
     if (item.name.includes(this.sect.chiefTitle)) {
       this.cmd.send(`ask2 ${item.id}`);
-      this.nowTask = 'dungeon';
-      this.attach(this.dungeonEvents);
-      this.cmd.send('tasks');
+      this.nowTask = 'tower';
+      this.attach(this.towerEvents);
+      this.cmd.send(this.gameInfo.tower.way);
     }
   }
 };
