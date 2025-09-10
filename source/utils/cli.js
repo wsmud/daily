@@ -53,14 +53,10 @@ const dungeons = {
       message: '检测到配置文件，是否向原配置文件新增？',
       default: true,
       when() {
-        return fs.existsSync('config.yaml') && fs.statSync('config.yaml').isFile();
+        return (
+          fs.existsSync('config.yaml') && fs.statSync('config.yaml').isFile()
+        );
       },
-    },
-    {
-      type: 'input',
-      name: 'pushplus',
-      message: 'pushplus的推送token？',
-      default: '',
     },
     {
       type: 'list',
@@ -98,6 +94,9 @@ const dungeons = {
         const checkPassword = await getToken(answers.account, thisAnswer);
         return !!checkPassword ? true : chalk.red('密码错误！');
       },
+      async format(prev) {
+        return await getToken(answers.account, prev);
+      },
     },
     {
       type: 'checkbox',
@@ -127,7 +126,7 @@ const dungeons = {
                   server: answers.server,
                   token: `${token} ${id}`,
                 },
-              })),
+              }))
             );
           });
         });
@@ -174,9 +173,27 @@ const dungeons = {
         },
       },
       {
+        type: 'number',
+        name: `${name}_dungeonNum`,
+        message: `${name}的副本次数？`,
+        default: 20,
+      },
+      {
         type: 'confirm',
         name: `${name}_sectDungeon`,
         message: `${name}是否扫荡古宗门？`,
+        default: false,
+      },
+      {
+        type: 'confirm',
+        name: `${name}_jindi`,
+        message: `${name}是否智能禁地？`,
+        default: false,
+      },
+      {
+        type: 'confirm',
+        name: `${name}_yaota`,
+        message: `${name}是否智能妖塔？`,
         default: false,
       },
 
@@ -189,32 +206,40 @@ const dungeons = {
         type: 'input',
         name: `${name}_logoutCommand`,
         message: `${name}登出前执行的命令？`,
-      },
+      }
     );
   });
 
   const otherAnswers = await inquirer.prompt(otherQuestions);
   const fainlAnswers = {
-    pushplus: rolesAnswers.pushplus,
     roles: rolesAnswers.roles.map((role) => {
       return {
         ...role,
         dungeon: `cr ${dungeons[otherAnswers[role.name]].id} ${
           otherAnswers[`${role.name}_dungeonDifficulty`] ? 1 : 0
         }`,
+        dungeonNum: otherAnswers[`${role.name}_dungeonNum`],
         sectDungeon: otherAnswers[`${role.name}_sectDungeon`],
+        yaota: otherAnswers[`${role.name}_yaota`],
+        jindi: otherAnswers[`${role.name}_jindi`],
         loginCommand: otherAnswers[`${role.name}_loginCommand`],
         logoutCommand: otherAnswers[`${role.name}_logoutCommand`],
       };
     }),
   };
 
-  if (fs.existsSync('config.yaml') && fs.statSync('config.yaml').isFile() && rolesAnswers.add) {
+  if (
+    fs.existsSync('config.yaml') &&
+    fs.statSync('config.yaml').isFile() &&
+    rolesAnswers.add
+  ) {
     const oldConfig = yaml.load(fs.readFileSync('config.yaml'));
     !oldConfig && (oldConfig = []);
     let oldRoles = Array.isArray(oldConfig) ? oldConfig : oldConfig.roles;
     fainlAnswers.roles.forEach((userRole) => {
-      const oldRolesIndex = oldRoles.findIndex(({ name }) => name === userRole.name);
+      const oldRolesIndex = oldRoles.findIndex(
+        ({ name }) => name === userRole.name
+      );
       if (oldRolesIndex >= 0) {
         oldRoles.splice(oldRolesIndex, 1, userRole);
       } else {
@@ -224,9 +249,12 @@ const dungeons = {
 
     fs.writeFileSync(
       'config.yaml',
-      yaml.dump({ pushplus: fainlAnswers.pushplus, roles: oldRoles }),
+      yaml.dump(
+        { pushplus: fainlAnswers.pushplus, roles: oldRoles },
+        { lineWidth: -1 }
+      )
     );
   } else {
-    fs.writeFileSync('config.yaml', yaml.dump(fainlAnswers));
+    fs.writeFileSync('config.yaml', yaml.dump(fainlAnswers, { lineWidth: -1 }));
   }
 })();

@@ -25,12 +25,16 @@ module.exports = function (tip) {
       logger.warning(
         `「${this.userConfig.name}」无法获取逃犯路径，逃犯位置为为「${this.huntTaskInfo.place}」`,
       );
-      this.cmd.send(`ask2 ${this.huntTaskInfo.taskerId};ask1 ${this.huntTaskInfo.taskerId}`);
+      this.cmd.send(
+        `ask2 ${this.huntTaskInfo.taskerId};ask1 ${this.huntTaskInfo.taskerId}`,
+      );
       return;
     }
 
     this.huntTaskInfo.nowTaskWay = JSON.parse(
-      JSON.stringify(this.gameInfo.hunt.path[this.huntTaskInfo.place].split(';')),
+      JSON.stringify(
+        this.gameInfo.hunt.path[this.huntTaskInfo.place].split(';'),
+      ),
     );
 
     this.combatFailedNum = 0;
@@ -50,7 +54,9 @@ module.exports = function (tip) {
 
   if (tip.includes('你要攻击谁')) {
     this.huntTaskInfo.nowTaskWay = JSON.parse(
-      JSON.stringify(this.gameInfo.hunt.path[this.huntTaskInfo.place].split(';')),
+      JSON.stringify(
+        this.gameInfo.hunt.path[this.huntTaskInfo.place].split(';'),
+      ),
     );
     this.cmd.send(this.huntTaskInfo.nowTaskWay.shift());
   }
@@ -76,7 +82,7 @@ module.exports = function (tip) {
       }
 
       this.cmd.send(this.gameInfo.hunt.way);
-    }, 3e3);
+    }, 1e4);
   }
 
   if (tip.includes('你不是在追捕吗')) {
@@ -87,7 +93,9 @@ module.exports = function (tip) {
       return;
     }
 
-    this.cmd.send(`ask2 ${this.huntTaskInfo.taskerId};ask1 ${this.huntTaskInfo.taskerId}`);
+    this.cmd.send(
+      `ask2 ${this.huntTaskInfo.taskerId};ask1 ${this.huntTaskInfo.taskerId}`,
+    );
   }
 
   if (tip.includes('最近没有在逃的逃犯了')) {
@@ -105,11 +113,14 @@ module.exports = function (tip) {
     clearInterval(this.timers.pfm);
   }
 
+  if (tip.includes('慢慢的你又恢复了') && !this.isCombat) {
+    this.cmd.send(this.gameInfo.hunt.way);
+  }
   if (tip.includes('你身上没有挖矿工具')) {
     this.cmd.send('jh fam 0 start;go east;go east;go south');
   }
 
-  if (/你挥着铁镐开始认真挖矿|你盘膝坐下开始闭关修炼/.test(tip)) {
+  if (/你挥着铁镐开始认真挖矿|你盘膝坐下/.test(tip)) {
     clearTimeout(this.timers.fix);
     clearInterval(this.timers.pfm);
     this.socketClose();

@@ -3,5 +3,6 @@ module.exports = function (data) {
     return;
   }
 
-  this.gameInfo.useLessItems.includes(data.name) && this.cmd.send(`fenjie ${data.id}`);
+  this.gameInfo.useLessItems.includes(data.name) &&
+    this.cmd.send(`fenjie ${data.id}`);
 };

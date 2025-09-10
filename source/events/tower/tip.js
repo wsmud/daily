@@ -29,11 +29,11 @@ module.exports = function (tip) {
       this.combatFailedNum = 0;
       setTimeout(() => {
         this.cmd.send(this.gameInfo.bank.way);
-      }, 1e4);
+      }, 3e4);
     } else {
       setTimeout(() => {
         this.cmd.send(this.gameInfo.temple.way);
-      }, 1e4);
+      }, 3e4);
     }
   }
 };
