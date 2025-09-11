@@ -2,7 +2,9 @@ const fs = require('fs');
 const path = require('path');
 const yaml = require('js-yaml');
 const Socket = require('./socket');
-const gameInfo = yaml.load(fs.readFileSync(path.resolve(__dirname, '../utils/gameInfo.yaml')));
+const gameInfo = yaml.load(
+  fs.readFileSync(path.resolve(__dirname, '../utils/gameInfo.yaml'))
+);
 
 module.exports = class Daily extends Socket {
   constructor(config) {
@@ -39,11 +41,14 @@ module.exports = class Daily extends Socket {
       pfm: null,
       fix: null,
     };
+    this.yaotaJing = 0;
     this.nowTask = 'sect';
     this.sectEvents = [];
     this.dungeonEvents = [];
     this.towerEvents = [];
     this.huntEvents = [];
+    this.yaotaEvents = [];
+    this.jindiEvents = [];
     this.sectDungeonEvents = [];
     this.generalEvents = [];
     this.loadEvents();
@@ -55,6 +60,8 @@ module.exports = class Daily extends Socket {
     this.dungeonEvents = this.loadEvent('dungeon');
     this.towerEvents = this.loadEvent('tower');
     this.huntEvents = this.loadEvent('hunt');
+    this.yaotaEvents = this.loadEvent('yaota');
+    this.jindiEvents = this.loadEvent('jindi');
     this.sectDungeonEvents = this.loadEvent('sectDungeon');
     this.attach(this.sectEvents);
   }

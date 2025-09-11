@@ -8,7 +8,7 @@ module.exports = function (tip) {
   if (tip.includes('你去帮我找')) {
     this.sectTaskInfo.taskItem = tip.match(/<.+?>.+?<\/.+?>/)[0];
     const seller = this.gameInfo.store.find(({ goods }) =>
-      goods.includes(this.sectTaskInfo.taskItem),
+      goods.includes(this.sectTaskInfo.taskItem)
     );
     if (seller) {
       this.sectTaskInfo.seller = seller.seller;
@@ -27,7 +27,7 @@ module.exports = function (tip) {
     this.cmd.send(
       /ord|hio/.test(this.userLevel)
         ? 'jh fam 0 start;go west;go west;go north;go enter;go west;xiulian'
-        : 'wakuang',
+        : 'wakuang'
     );
   }
 
@@ -37,7 +37,7 @@ module.exports = function (tip) {
     this.cmd.send(
       /ord|hio/.test(this.userLevel)
         ? 'jh fam 0 start;go west;go west;go north;go enter;go west;xiulian'
-        : 'wakuang',
+        : 'wakuang'
     );
   }
 
@@ -49,6 +49,12 @@ module.exports = function (tip) {
   if (/你先去休息一下吧/.test(tip)) {
     this.sect.tasker = null;
     logger.info(`「${this.userConfig.name}」师门任务完成`);
-    this.cmd.send(this.sect.chiefWay);
+    if (this.sect.chiefWay) {
+      this.cmd.send(this.sect.chiefWay);
+    } else {
+      this.nowTask = 'tower';
+      this.attach(this.towerEvents);
+      this.cmd.send(this.gameInfo.tower.way);
+    }
   }
 };
